@@ -1,0 +1,10 @@
+# 定义一个定时任务，键名可以任意取，但不能重复
+broadcast:
+  # 定义定时任务的间隔时间，单位是秒
+  interval: 10
+  # 定义定时任务的命令，可以是任何有效的控制台命令
+  command: say Hello, this is a timed task!
+
+clear:
+  interval: 30
+  command: kill @e[type=item]
