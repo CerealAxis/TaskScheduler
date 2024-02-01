@@ -3,8 +3,9 @@ broadcast:
   # 定义定时任务的间隔时间，单位是秒
   interval: 10
   # 定义定时任务的命令，可以是任何有效的控制台命令
-  command: say Hello, this is a timed task!
+  command: say Hello, this is Taskscheduler,created by CerealAxis!
 
-clear:
-  interval: 30
-  command: kill @e[type=item]
+# 示例2
+#clear:
+#  interval: 30
+#  command: kill @e[type=item]

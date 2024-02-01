@@ -2,9 +2,11 @@ name: taskscheduler
 version: '${project.version}'
 main: xaviermc.top.taskscheduler.taskscheduler
 api-version: '1.20'
+author: CerealAxis
 
 commands:
   taskscheduler:
-    description: 重载插件
+    description: reload the taskscheduler
     usage: /taskscheduler reload
+    aliases: ts
 
