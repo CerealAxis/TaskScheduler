@@ -9,57 +9,91 @@ import org.bukkit.command.*;
 
 import xaviermc.top.taskscheduler.bstats.Bstats;
 
-public class taskscheduler extends JavaPlugin implements CommandExecutor {
+import java.util.List;
+import java.util.logging.Logger;
+
+public class TaskScheduler extends JavaPlugin implements CommandExecutor {
+
+    private static final Logger logger = Logger.getLogger("Minecraft");
 
     @Override
     public void onEnable() {
-        getLogger().info(ChatColor.GREEN + "插件加载中");
+        logger.info(ChatColor.GREEN + "插件正在加载...");
+
         Bstats.bstats();
+
         getCommand("taskscheduler").setExecutor(this);
+
         saveDefaultConfig();
+
         FileConfiguration config = getConfig();
+
         for (String key : config.getKeys(false)) {
             int interval = config.getInt(key + ".interval");
-            String command = config.getString(key + ".command");
+            List<String> commands = config.getStringList(key + ".commands");
+
             BukkitRunnable task = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                    logger.info("执行定时任务：" + key);
+                    executeCommands(commands);
                 }
             };
+
             task.runTaskTimer(this, 0, interval * 20L);
         }
-        getLogger().info(ChatColor.GREEN + "插件加载成功");
+
+        logger.info(ChatColor.GREEN + "插件加载成功。");
     }
 
+    private void executeCommands(List<String> commands) {
+        for (String command : commands) {
+            if (command != null && !command.isEmpty()) {
+                Bukkit.getScheduler().runTask(this, () -> {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                });
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Override
     public void onDisable() {
-        getLogger().info(ChatColor.GREEN + "定时任务取消中");
+        logger.info(ChatColor.GREEN + "取消定时任务中...");
         Bukkit.getScheduler().cancelTasks(this);
-        getLogger().info(ChatColor.GREEN + "定时任务已取消");
-        getLogger().info("§a插件已成功卸载");
+        logger.info(ChatColor.GREEN + "定时任务已取消。");
+        logger.info("§a插件已成功卸载。");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("taskscheduler") || label.equalsIgnoreCase("ts")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-                getLogger().info(ChatColor.RED + "取消旧定时任务");
+                logger.info(ChatColor.RED + "取消旧定时任务");
                 Bukkit.getScheduler().cancelTasks(this);
+
                 reloadConfig();
                 FileConfiguration config = getConfig();
+
                 for (String key : config.getKeys(false)) {
                     int interval = config.getInt(key + ".interval");
-                    String commandString = config.getString(key + ".command");
+                    List<String> commands = config.getStringList(key + ".commands");
+
                     BukkitRunnable task = new BukkitRunnable() {
                         @Override
                         public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString);
+                            logger.info("执行定时任务: " + key);
+                            executeCommands(commands);
                         }
                     };
+
                     task.runTaskTimer(this, 0, interval * 20L);
                 }
+
                 sender.sendMessage("§a插件已经重新加载");
                 return true;
             } else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
@@ -73,11 +107,10 @@ public class taskscheduler extends JavaPlugin implements CommandExecutor {
                 return true;
             }
         }
+
+        logger.warning("未知命令或输入的指令有误，请检查");
         sender.sendMessage(ChatColor.RED + "输入的指令有误，请检查");
         return false;
     }
 }
-
-
-
 

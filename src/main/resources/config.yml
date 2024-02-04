@@ -1,11 +1,20 @@
+# config-version:2.0
+# 配置文件于1.1.3版本后有改变，请仔细检查并修改后后再使用！
+
 # 定义一个定时任务，键名可以任意取，但不能重复
 broadcast:
   # 定义定时任务的间隔时间，单位是秒
   interval: 10
   # 定义定时任务的命令，可以是任何有效的控制台命令
-  command: say Hello, this is Taskscheduler,created by CerealAxis!
+  commands:
+  # 是commands不是command！
+    - "say Hello, this is Taskscheduler!"
+    - "say Which is created by CerealAxis."
+  # 设置多条命令就仿照格式接着往下写就可以，千万注意格式！
 
 # 示例2
 #clear:
 #  interval: 30
-#  command: kill @e[type=item]
+#  commands:
+#    - "say clear the server"
+#单条命令就按照这样设置。

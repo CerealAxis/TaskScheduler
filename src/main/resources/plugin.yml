@@ -1,6 +1,6 @@
 name: taskscheduler
 version: '${project.version}'
-main: xaviermc.top.taskscheduler.taskscheduler
+main: xaviermc.top.taskscheduler.TaskScheduler
 api-version: '1.20'
 author: CerealAxis
 
