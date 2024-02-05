@@ -1,8 +1,8 @@
 name: Dev build
 
 on:
-  push:
-    branches: [ master ]
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -19,8 +19,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'zulu'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+        server-id: github 
+        settings-path: ${{ github.workspace }} 
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
@@ -29,4 +29,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: TaskScheduler-Dev
-        path: build/libs
+        path: /home/runner/work/TaskScheduler/TaskScheduler/target
