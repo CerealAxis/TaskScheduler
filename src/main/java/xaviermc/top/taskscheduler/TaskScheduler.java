@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.command.*;
 
 import xaviermc.top.taskscheduler.bstats.Bstats;
+import xaviermc.top.taskscheduler.updatechecker.UpdateChecker;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,6 +22,9 @@ public class TaskScheduler extends JavaPlugin implements CommandExecutor {
         logger.info(ChatColor.GREEN + "插件正在加载...");
 
         Bstats.bstats();
+
+        UpdateChecker updateChecker = new UpdateChecker(this,115092);
+        updateChecker.checkForUpdates();
 
         getCommand("taskscheduler").setExecutor(this);
 
