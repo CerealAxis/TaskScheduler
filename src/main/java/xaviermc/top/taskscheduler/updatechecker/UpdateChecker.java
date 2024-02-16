@@ -37,7 +37,7 @@ public class UpdateChecker {
     public void checkForUpdates() {
         getVersion(version -> {
             String currentVersion = plugin.getDescription().getVersion();
-            if (currentVersion.compareToIgnoreCase(version) < 0) {
+            if (currentVersion.compareToIgnoreCase(version) > 0) {
                 plugin.getLogger().info(ChatColor.GREEN + "您当前使用的可能是测试版，若追求稳定请使用最新的正式版！");
                 plugin.getLogger().info(ChatColor.GREEN + "当前最新稳定版版本号为：" + version);
                 String updateUrl = "https://www.spigotmc.org/resources/taskscheduler.115092/updates";
