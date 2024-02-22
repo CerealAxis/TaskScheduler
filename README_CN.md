@@ -1,5 +1,7 @@
 # TaskScheduler: 定时任务执行
 
+[中文](README_CN.md)|[English](README.md)
+
 ## 支持的版本
 | 平台     | 版本     |
 |----------|---------|
@@ -11,12 +13,12 @@
 ### 注意：其他Spigot的分支版本未经测试，可能无法正常运行！
 
 ## 发布平台
-| 平台     |URL|
-|---------|---|
-| SpigotMC (正式版)|https://www.spigotmc.org/resources/taskscheduler.115092/|
-| MineBBS (正式版)|https://www.minebbs.com/resources/taskscheduler.6088/|
-| Github (正式版)|https://github.com/CerealAxis/TaskScheduler/releases|
-|Github (开发版)|https://github.com/CerealAxis/TaskScheduler/actions|
+| 平台             |URL|
+|----------------|---|
+| SpigotMC (正式版) |https://www.spigotmc.org/resources/taskscheduler.115092/|
+| MineBBS (正式版)  |https://www.minebbs.com/resources/taskscheduler.6088/|
+| Github (正式版)   |https://github.com/CerealAxis/TaskScheduler/releases|
+| Github (开发版)   |https://github.com/CerealAxis/TaskScheduler/actions|
 
 ## Config
 ```yml

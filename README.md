@@ -1,5 +1,7 @@
 # TaskScheduler: Automate Scheduled Task Execution
 
+[中文](README_CN.md)|[English](README.md)
+
 ## Supported Versions
 | Platform | Version |
 |----------|---------|
@@ -11,12 +13,12 @@
 ### Note: Other downstream branches of Spigot have not been tested and may not function correctly!
 
 ## Deployment Platform
-| Platform |URL|
-|---------|---|
-| SpigotMC (release)|https://www.spigotmc.org/resources/taskscheduler.115092/|
-| MineBBS (release)|https://www.minebbs.com/resources/taskscheduler.6088/|
-| Github (release)|https://github.com/CerealAxis/TaskScheduler/releases|
-|Github (Dev)|https://github.com/CerealAxis/TaskScheduler/actions|
+| Platform           |URL|
+|--------------------|---|
+| SpigotMC (release) |https://www.spigotmc.org/resources/taskscheduler.115092/|
+| MineBBS (release)  |https://www.minebbs.com/resources/taskscheduler.6088/|
+| Github (release)   |https://github.com/CerealAxis/TaskScheduler/releases|
+| Github (Dev)       |https://github.com/CerealAxis/TaskScheduler/actions|
 
 ## Config
 ```yml
