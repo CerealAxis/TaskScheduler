@@ -1,3 +1,25 @@
+# TaskScheduler: 定时任务执行
+
+## 支持的版本
+| 平台     | 版本     |
+|----------|---------|
+| Spigot   | 1.20+    |
+| Paper    | 1.20+    |
+| Purpur   | 1.20+    |
+| Leaves   | 1.20+    |
+
+### 注意：其他Spigot的分支版本未经测试，可能无法正常运行！
+
+## 发布平台
+| 平台     |URL|
+|---------|---|
+| SpigotMC (正式版)|https://www.spigotmc.org/resources/taskscheduler.115092/|
+| MineBBS (正式版)|https://www.minebbs.com/resources/taskscheduler.6088/|
+| Github (正式版)|https://github.com/CerealAxis/TaskScheduler/releases|
+|Github (开发版)|https://github.com/CerealAxis/TaskScheduler/actions|
+
+## Config
+```yml
 # config-version:3.0
 # 配置文件于1.1.4版本后有改变，请仔细检查并修改后后再使用！
 
@@ -32,3 +54,15 @@ clearing:
     - "say Hello, this is Taskscheduler!"
     - "say Which is created by CerealAxis."
   # 设置多条命令就仿照格式接着往下写就可以，千万注意格式！
+```
+## 命令
+
+#### 命令里面的 **ts** 也可以写为 TaskScheduler
+
+| Command       | Description |
+|---------------|-------------|
+| /ts reload    | 重载插件        |
+| /ts help      | 打开帮助菜单      |
+
+## 统计
+[_![](https://bstats.org/signatures/bukkit/TaskScheduler.svg)](https://bstats.org/plugin/bukkit/TaskScheduler/20876)
