@@ -12,6 +12,8 @@ import xaviermc.top.taskscheduler.updatechecker.UpdateChecker;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TaskScheduler extends JavaPlugin implements CommandExecutor {
@@ -31,50 +33,53 @@ public class TaskScheduler extends JavaPlugin implements CommandExecutor {
 
         saveDefaultConfig();
 
-        FileConfiguration config = getConfig();
+        loadTasksFromConfig();
 
-        for (String key : config.getKeys(false)) {
-            int interval = config.getInt(key + ".interval");
-            String timeString = config.getString(key + ".time");
-            int time = 0;
-            if (timeString.equals("-1")) {
-                time = -1;
-            } else {
-                time = Integer.parseInt(timeString);
-            }
-
-            List<String> commands = config.getStringList(key + ".commands");
-            if (interval > 0 && time == -1) {
-                BukkitRunnable task = new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        logger.info("执行间隔任务：" + key);
-                        executeCommands(commands);
-                    }
-                };
-                task.runTaskTimer(this, 0, interval * 20L);
-                logger.info(ChatColor.GREEN + "成功注册间隔任务：" + key);
-            } else if (interval == -1 && time > 0) {
-                int finalTime = time;
-                BukkitRunnable task = new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        LocalTime currentTime = LocalTime.now();
-                        int currentMinutes = currentTime.getHour() * 60 + currentTime.getMinute();
-                        if (currentMinutes >= finalTime && currentMinutes < finalTime + 0.05) {
-                            logger.info("执行定时任务：" + key);
-                            executeCommands(commands);
-                        }
-                    }
-                };
-
-                task.runTaskTimer(this, 0, 55 * 20L);
-                logger.info(ChatColor.GREEN + "成功注册定时任务：" + key);
-            } else {
-                logger.info("Error");
-            }
-        }
         logger.info(ChatColor.GREEN + "插件加载成功。");
+    }
+
+    private void loadTasksFromConfig() {
+        FileConfiguration config = getConfig();
+        for (String key : config.getKeys(false)) {
+            Optional<Runnable> task = createTask(key, config);
+            task.ifPresent(runnable -> {
+                if (config.getInt(key + ".interval") > 0) {
+                    BukkitRunnable bukkitTask = new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            runnable.run();
+                        }
+                    };
+                    bukkitTask.runTaskTimer(this, 0, config.getInt(key + ".interval") * 20L);
+                    logger.log(Level.INFO, ChatColor.GREEN + "成功注册间隔任务：" + key);
+                } else {
+                    BukkitRunnable bukkitTask = new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            LocalTime currentTime = LocalTime.now();
+                            int currentMinutes = currentTime.getHour() * 60 + currentTime.getMinute();
+                            if (currentMinutes >= config.getInt(key + ".time") && currentMinutes < config.getInt(key + ".time") + 0.05) {
+                                runnable.run();
+                            }
+                        }
+                    };
+                    bukkitTask.runTaskTimer(this, 0, 60 * 20L);
+                    logger.log(Level.INFO, ChatColor.GREEN + "成功注册定时任务：" + key);
+                }
+            });
+        }
+    }
+
+    private Optional<Runnable> createTask(String key, FileConfiguration config) {
+        List<String> commands = config.getStringList(key + ".commands");
+        if (commands.isEmpty()) {
+            logger.log(Level.WARNING, "Error");
+            return Optional.empty();
+        }
+        return Optional.of(() -> {
+            logger.log(Level.INFO, "执行任务：" + key);
+            executeCommands(commands);
+        });
     }
 
     private void executeCommands(List<String> commands) {
@@ -103,49 +108,7 @@ public class TaskScheduler extends JavaPlugin implements CommandExecutor {
                 Bukkit.getScheduler().cancelTasks(this);
 
                 reloadConfig();
-                FileConfiguration config = getConfig();
-
-                for (String key : config.getKeys(false)) {
-                    int interval = config.getInt(key + ".interval");
-                    String timeString = config.getString(key + ".time");
-                    int time = 0;
-                    if (timeString.equals("-1")) {
-                        time = -1;
-                    } else {
-                        time = Integer.parseInt(timeString);
-                    }
-
-                    List<String> commands = config.getStringList(key + ".commands");
-                    if (interval > 0 && time == -1) {
-                        BukkitRunnable task = new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                logger.info("执行间隔任务：" + key);
-                                executeCommands(commands);
-                            }
-                        };
-                        task.runTaskTimer(this, 0, interval * 20L);
-                        logger.info(ChatColor.GREEN + "成功注册间隔任务：" + key);
-                    } else if (interval == -1 && time > 0) {
-                        int finalTime = time;
-                        BukkitRunnable task = new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                LocalTime currentTime = LocalTime.now();
-                                int currentMinutes = currentTime.getHour() * 60 + currentTime.getMinute();
-                                if (currentMinutes >= finalTime && currentMinutes < finalTime + 0.05) {
-                                    logger.info("执行定时任务：" + key);
-                                    executeCommands(commands);
-                                }
-                            }
-                        };
-
-                        task.runTaskTimer(this, 0, 55 * 20L);
-                        logger.info(ChatColor.GREEN + "成功注册定时任务：" + key);
-                    } else {
-                        logger.warning("Error");
-                    }
-                }
+                loadTasksFromConfig();
 
                 sender.sendMessage("§a插件已经重新加载");
                 return true;
@@ -166,4 +129,3 @@ public class TaskScheduler extends JavaPlugin implements CommandExecutor {
         return false;
     }
 }
-
