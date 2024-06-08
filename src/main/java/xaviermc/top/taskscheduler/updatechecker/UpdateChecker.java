@@ -29,7 +29,7 @@ public class UpdateChecker {
                     consumer.accept(scanner.next());
                 }
             } catch (IOException exception) {
-                plugin.getLogger().info("无法检查更新：" + exception.getMessage());
+                plugin.getLogger().info("Unable to check the plugin version,reason:" + exception.getMessage());
             }
         });
     }
