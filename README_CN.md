@@ -1,24 +1,33 @@
-# TaskScheduler: 定时任务执行
+# TaskScheduler
 
-[中文](README_CN.md)|[English](README.md)
+_自动化定时任务执行_
+
+[![GitHub release](https://img.shields.io/github/v/release/CerealAxis/TaskScheduler?style=flat-square)](https://github.com/CerealAxis/TaskScheduler/releases)
+[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/CerealAxis/TaskScheduler/dev-build.yml?style=flat-square)](https://github.com/CerealAxis/TaskScheduler/actions)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/CerealAxis/TaskScheduler)
+![GitHub all releases](https://img.shields.io/github/downloads/CerealAxis/TaskScheduler/total?style=flat-square)
+
+[中文](README_CN.md) | [English](README.md)
 
 ## 支持的版本
-| 平台     | 版本     |
-|----------|---------|
-| Spigot   | 1.20+    |
-| Paper    | 1.20+    |
-| Purpur   | 1.20+    |
-| Leaves   | 1.20+    |
 
-### 注意：其他Spigot的分支版本未经测试，可能无法正常运行！
+| 平台    | 版本        |
+|---------|-------------|
+| Spigot  | 1.20-1.20.6 |
+| Paper   | 1.20-1.20.6 |
+| Purpur  | 1.20-1.20.6 |
+| Leaves  | 1.20-1.20.6 |
 
-## 发布平台
-| 平台             |URL|
-|----------------|---|
-| SpigotMC (正式版) |https://www.spigotmc.org/resources/taskscheduler.115092/|
-| MineBBS (正式版)  |https://www.minebbs.com/resources/taskscheduler.6088/|
-| Github (正式版)   |https://github.com/CerealAxis/TaskScheduler/releases|
-| Github (开发版)   |https://github.com/CerealAxis/TaskScheduler/actions|
+> 注意：尚未测试Spigot的其他下游分支，可能无法正常运行。
+
+## 下载
+
+| 平台               | URL                                                                          |
+|--------------------|------------------------------------------------------------------------------|
+| SpigotMC (发布版)  | [SpigotMC](https://www.spigotmc.org/resources/taskscheduler.115092/)         |
+| MineBBS (发布版)   | [MineBBS](https://www.minebbs.com/resources/taskscheduler.6088/)             |
+| GitHub (发布版)    | [GitHub Releases](https://github.com/CerealAxis/TaskScheduler/releases)      |
+| GitHub (开发版)    | [GitHub Actions](https://github.com/CerealAxis/TaskScheduler/actions)   
 
 ## Config
 ```yml
@@ -59,7 +68,7 @@ clearing:
 ```
 ## 命令
 
-#### 命令里面的 **ts** 也可以写为 TaskScheduler
+> 命令里面的 **ts** 也可以写为 TaskScheduler
 
 | Command       | Description |
 |---------------|-------------|
