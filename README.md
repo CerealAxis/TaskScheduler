@@ -1,70 +1,78 @@
-# TaskScheduler: Automate Scheduled Task Execution
+# TaskScheduler 
 
-[中文](README_CN.md)|[English](README.md)
+_Automate Scheduled Task Execution_
+
+[![GitHub release](https://img.shields.io/github/v/release/CerealAxis/TaskScheduler?style=flat-square)](https://github.com/CerealAxis/TaskScheduler/releases)
+[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/CerealAxis/TaskScheduler/dev-build.yml?style=flat-square)](https://github.com/CerealAxis/TaskScheduler/actions)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/CerealAxis/TaskScheduler)
+![GitHub all releases](https://img.shields.io/github/downloads/CerealAxis/TaskScheduler/total?style=flat-square)
+
+[中文](README_CN.md) | [English](README.md)
 
 ## Supported Versions
-| Platform | Version |
-|----------|---------|
-| Spigot   | 1.20+    |
-| Paper    | 1.20+    |
-| Purpur   | 1.20+    |
-| Leaves   | 1.20+    |
 
-### Note: Other downstream branches of Spigot have not been tested and may not function correctly!
+| Platform | Version     |
+|----------|-------------|
+| Spigot   | 1.20-1.20.6 |
+| Paper    | 1.20-1.20.6 |
+| Purpur   | 1.20-1.20.6 |
+| Leaves   | 1.20-1.20.6 |
 
-## Deployment Platform
-| Platform           |URL|
-|--------------------|---|
-| SpigotMC (release) |https://www.spigotmc.org/resources/taskscheduler.115092/|
-| MineBBS (release)  |https://www.minebbs.com/resources/taskscheduler.6088/|
-| Github (release)   |https://github.com/CerealAxis/TaskScheduler/releases|
-| Github (Dev)       |https://github.com/CerealAxis/TaskScheduler/actions|
+> Note: Other downstream branches of Spigot have not been tested and may not function correctly.
+
+## Download
+
+| Platform           | URL                                                                        |
+|--------------------|----------------------------------------------------------------------------|
+| SpigotMC (release) | [SpigotMC](https://www.spigotmc.org/resources/taskscheduler.115092/)       |
+| MineBBS (release)  | [MineBBS](https://www.minebbs.com/resources/taskscheduler.6088/)           |
+| GitHub (release)   | [GitHub Releases](https://github.com/CerealAxis/TaskScheduler/releases)    |
+| GitHub (Dev)       | [GitHub Actions](https://github.com/CerealAxis/TaskScheduler/actions)      |
 
 ## Config
-```yml
-# config-version:3.0
-# The configuration file has changed since version 1.1.4. Please carefully check and modify before use!
 
-# Define a scheduled task. The key name can be any, but must be unique.
+```yml
+# config-version: 3.0
+# The configuration file has changed since version 1.1.4. Please review and update before use.
+
+# Define a scheduled task. The key name can be any unique identifier.
 broadcast:
-  # Define the interval time for the interval task, in seconds.
+  # Set the interval time for the task in seconds.
   interval: 10
-  time: -1 # This indicates that this task is an interval task.
-  # Define the command for the scheduled task. It can be any valid console command.
+  time: -1 # Indicates this is an interval task.
+  # Define the commands to be executed. These can be any valid console commands.
   commands:
-    # It should be "commands" not "command"!
-    - "say Hello, this is Taskscheduler!"
-    - "say Which is created by CerealAxis."
-  # To set multiple commands, follow the format and continue writing below. Pay attention to the formatting!
+    - "say Hello, this is TaskScheduler!"
+    - "say Created by CerealAxis."
 
 # Example 2
-#clear:
-#  interval: 30
-#  commands:
-#    - "say clear the server"
-# For a single command, set it up like this.
+# clear:
+#   interval: 30
+#   commands:
+#     - "say Clearing the server"
+# For a single command, configure it similarly.
 
-# Define a scheduled task. The key name can be any, but must be unique.
+# Define another scheduled task.
 clearing:
-  # Define the interval time for the interval task, in seconds.
-  interval: -1 #-1 means disabled
-  time: 12:00 # This indicates that this task is a scheduled task.
-  # The time and interval parameters cannot be enabled at the same time, otherwise an error will occur.
-  # Define the command for the scheduled task. It can be any valid console command.
+  # Set the interval time for the task in seconds.
+  interval: -1 # -1 means disabled
+  time: 12:00 # Indicates this is a scheduled task.
+  # Note: The 'time' and 'interval' parameters cannot be enabled simultaneously.
+  # Define the commands to be executed.
   commands:
-    # It should be "commands" not "command"!
-    - "say Hello, this is Taskscheduler!"
-    - "say Which is created by CerealAxis."
-  # To set multiple commands, follow the format and continue writing below. Pay attention to the formatting!
+    - "say Hello, this is TaskScheduler!"
+    - "say Created by CerealAxis."
 ```
+
 ## Commands
 
-#### The **ts** in the command can also be written as TaskScheduler
+> The **ts** in the commands can also be written as **TaskScheduler**.
 
-| Command       | Description                                 |
-|---------------|---------------------------------------------|
-| /ts reload    | Reloads the configuration of TaskScheduler  |
-| /ts help      | Opens the command help menu                  |
+| Command    | Description                               |
+|------------|-------------------------------------------|
+| /ts reload | Reloads the TaskScheduler configuration.  |
+| /ts help   | Opens the command help menu.              |
 
 ## Statistics
-[_![](https://bstats.org/signatures/bukkit/TaskScheduler.svg)](https://bstats.org/plugin/bukkit/TaskScheduler/20876)
+
+[![bStats](https://bstats.org/signatures/bukkit/TaskScheduler.svg)](https://bstats.org/plugin/bukkit/TaskScheduler/20876)
